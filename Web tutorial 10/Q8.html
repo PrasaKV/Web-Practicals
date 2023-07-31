@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Year of Birth from NIC Number</title>
+</head>
+<body>
+    <h2>Year of Birth from NIC Number</h2>
+    <label for="nic">Enter NIC number:</label>
+    <input type="text" id="nic" placeholder="Enter NIC number">
+    <button onclick="displayYearOfBirth()">Display Year of Birth</button>
+    <p id="result"></p>
+
+    <script>
+        function displayYearOfBirth() {
+            const nicNumber = document.getElementById("nic").value;
+            const yearOfBirth = getYearOfBirthFromNic(nicNumber);
+            const resultElement = document.getElementById("result");
+
+            if (yearOfBirth !== null) {
+                resultElement.innerText = `The year of birth is: ${yearOfBirth}`;
+            } else {
+                resultElement.innerText = "Invalid NIC number format.";
+            }
+        }
+
+        function getYearOfBirthFromNic(nicNumber) {
+            // Check if the NIC number is of the expected length (12 characters)
+            if (nicNumber.length === 12) {
+                // Extract the first 4 characters from the NIC number (assuming they represent the year of birth)
+                const yearOfBirthStr = nicNumber.substring(0, 4);
+
+                // Check if the extracted substring consists of numeric characters
+                if (/^\d+$/.test(yearOfBirthStr)) {
+                    // Convert the extracted substring to an integer to get the year of birth
+                    const yearOfBirth = parseInt(yearOfBirthStr, 10);
+
+                    // Return the year of birth
+                    return yearOfBirth;
+                } else {
+                    // If the extracted substring is not numeric, the NIC number is not in the expected format
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        }
+    </script>
+</body>
+</html>
